@@ -8,7 +8,7 @@ module ActionHandler
     def initialize(args = {})
       @content_type = args.slice(*CONTENT_TYPES.keys).keys.first&.to_sym
       @content = args[@content_type]
-      @status = args[:status] || @content ? 200 : 204
+      @status = args[:status] || (@content ? 200 : 204)
     end
 
     def render
