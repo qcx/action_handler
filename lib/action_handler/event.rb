@@ -42,7 +42,7 @@ module ActionHandler
     end
 
     def parse_string(value)
-      JSON.parse(value).with_indifferent_access
+      convert_value_to_hash(JSON.parse(value))
     rescue JSON::ParserError
       value
     end
