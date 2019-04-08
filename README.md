@@ -7,7 +7,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'action_handler', git: 'git://github.com/PedroSeda/action_handler.git', tag: 'v0.1.0'
+gem 'action_handler', git: 'git://github.com/qcx/action_handler.git', tag: 'v0.1.0'
 ```
 
 And then execute:
