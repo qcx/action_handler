@@ -1,6 +1,6 @@
 # ActionHandler
-[![CodeFactor](https://www.codefactor.io/repository/github/pedroseda/action_handler/badge)](https://www.codefactor.io/repository/github/pedroseda/action_handler)
-[![Build Status](https://travis-ci.org/PedroSeda/action_handler.svg?branch=master)](https://travis-ci.org/PedroSeda/action_handler)
+[![CodeFactor](https://www.codefactor.io/repository/github/qcx/action_handler/badge)](https://www.codefactor.io/repository/github/qcx/action_handler)
+[![Build Status](https://travis-ci.org/qcx/action_handler.svg?branch=master)](https://travis-ci.org/qcx/action_handler)
 
 ## Installation
 
