@@ -44,6 +44,8 @@ functions:
 # app/handlers/items_handler.rb
 
 class ItemsHandler < ActionHandler::Base
+  source ActionHandler::Sources::HTTP.new
+
   def index
     render json: Item.all
   end
@@ -64,7 +66,6 @@ Parsed from the received `event`
 
 #### Supports
 - Http
-- Lambda (InvokeFunction)
 - SQS
 
 ## Development
@@ -76,19 +77,6 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 Bug reports and pull requests are welcome on GitHub at https://github.com/PedroSeda/action_handler. This project is intended to be a safe, welcoming space for collaboration.
 
 ## Roadmap
-
-### Modules to parse different event inputs
-
-```ruby
-class ItemsHandler
-  include ActionHandler::Params::HTTP # Maybe included as default
-  include ActionHandler::Params::SQS
-
-  def create
-    Item.create(params)
-  end
-end
-```
 
 ### Map status codes
 ```ruby

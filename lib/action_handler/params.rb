@@ -1,7 +1,13 @@
 module ActionHandler
-  class Event
-    def initialize(event)
-      @hash = event.with_indifferent_access
+  class Params
+    def self.build(hash = {}, sources: [])
+      sources.reduce(self.new) do |params, source|
+        params.merge(source.parametrize(hash))
+      end
+    end
+
+    def initialize(hash = {})
+      @hash = hash.with_indifferent_access
     end
 
     def [](key)
@@ -16,6 +22,14 @@ module ActionHandler
     def slice(*keys)
       keys.each { |key| convert_values_to_hashes(key, @hash[key]) }
       @hash.slice(*keys)
+    end
+
+    def merge(params)
+      self.class.new(@hash.merge(params.to_h))
+    end
+
+    def to_h
+      @hash
     end
 
     private
