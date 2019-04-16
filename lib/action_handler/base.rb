@@ -1,10 +1,10 @@
 module ActionHandler
   class Base
-    attr_reader :params
-
-    def initialize(action, params)
+    def initialize(action, event, context)
       @action = action
-      @params = params
+      @event = ActionHandler::Params.new(event)
+      @context = ActionHandler::Params.new(context)
+      @params = ActionHandler::Params.build(event, sources: self.class.sources)
     end
 
     def call
@@ -13,9 +13,7 @@ module ActionHandler
     end
 
     def self.method_missing(action, **args, &block)
-      event = ActionHandler::Event.new(args[:event])
-      params = ActionHandler::Parametrizer.from_event(event)
-      new(action, params).call
+      new(action, args[:event], args[:context]).call
     end
 
     private
@@ -26,6 +24,14 @@ module ActionHandler
 
     def response
       @response ||= render
+    end
+
+    def self.source(source)
+      sources.push(source)
+    end
+
+    def self.sources
+      @@sources ||= []
     end
   end
 end
