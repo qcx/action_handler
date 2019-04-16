@@ -8,8 +8,8 @@ module ActionHandler
     end
 
     def call
-      run
-      @response || render
+      send(@action)
+      response
     end
 
     def self.method_missing(action, **args, &block)
@@ -20,12 +20,12 @@ module ActionHandler
 
     private
 
-    def run
-      send(@action)
-    end
-
     def render(args = {})
       @response = ActionHandler::Renderer.new(args).render
+    end
+
+    def response
+      @response ||= render
     end
   end
 end

@@ -1,6 +1,6 @@
 module ActionHandler
   module Instrumentation
-    def run
+    def call
       setup
       begin
         super
@@ -8,6 +8,7 @@ module ActionHandler
         exception(e)
       end
       cleanup
+      response
     end
   end
 end
