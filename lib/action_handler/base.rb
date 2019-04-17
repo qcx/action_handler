@@ -1,9 +1,11 @@
 module ActionHandler
   class Base
+    attr_reader :event, :context, :params
+
     def initialize(action, event, context)
       @action = action
       @event = ActionHandler::Params.new(event)
-      @context = ActionHandler::Params.new(context)
+      @context = context
       @params = ActionHandler::Params.build(event, sources: self.class.sources)
     end
 

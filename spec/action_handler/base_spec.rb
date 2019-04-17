@@ -5,11 +5,11 @@ RSpec.describe ActionHandler::Base do
         source ActionHandler::Sources::HTTP.new
 
         def index
-          { key: @params[:key] }
+          { key: params[:key] }
         end
 
         def show
-          render json: { key: @params[:key] }
+          render json: { key: params[:key] }
         end
       end
     end
