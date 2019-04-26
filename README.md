@@ -7,7 +7,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'action_handler', git: 'git://github.com/qcx/action_handler.git', tag: 'v0.1.0'
+gem 'action_handler', git: 'git://github.com/qcx/action_handler.git', tag: 'v0.1.3'
 ```
 
 And then execute:
@@ -65,8 +65,9 @@ end
 Parsed from the received `event`
 
 #### Supports
-- Http
+- HTTP
 - SQS
+- SNS
 
 ## Development
 
@@ -74,9 +75,15 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/PedroSeda/action_handler. This project is intended to be a safe, welcoming space for collaboration.
+Bug reports and pull requests are welcome on GitHub at https://github.com/qcx/action_handler. This project is intended to be a safe, welcoming space for collaboration.
 
 ## Roadmap
+
+### More sources
+- CloudWatch
+- DynamoDB
+- Kinesis
+- S3
 
 ### Map status codes
 ```ruby
@@ -84,7 +91,7 @@ render status: :ok
 render status: :no_content
 ```
 
-### Use different Renderers for each content type
+### Renderers for each content type
 ```ruby
 render json: Item.all # should use Renderers::Json.new(args).render
 ```
