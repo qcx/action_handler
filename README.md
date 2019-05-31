@@ -68,6 +68,7 @@ Parsed from the received `event`
 - HTTP
 - SQS
 - SNS
+- S3
 
 ## Development
 
@@ -83,7 +84,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/qcx/ac
 - CloudWatch
 - DynamoDB
 - Kinesis
-- S3
 
 ### Map status codes
 ```ruby
