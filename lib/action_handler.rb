@@ -10,6 +10,7 @@ require "action_handler/version"
 require "action_handler/sources/http"
 require "action_handler/sources/invoke"
 require "action_handler/sources/sns"
+require "action_handler/sources/s3"
 require "action_handler/sources/sqs"
 
 module ActionHandler
