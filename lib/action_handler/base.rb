@@ -33,7 +33,7 @@ module ActionHandler
     end
 
     def self.sources
-      @@sources ||= []
+      @sources ||= []
     end
   end
 end
