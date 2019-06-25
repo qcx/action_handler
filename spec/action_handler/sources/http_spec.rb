@@ -29,7 +29,7 @@ RSpec.describe ActionHandler::Sources::HTTP do
     end
 
     context :body do
-      let(:event) { { "body" => { level: 32 } } }
+      let(:event) { { "body" => JSON.generate({ level: 32 }) } }
 
       it "should return an ActionHandler::Params object" do
         expect(params.class).to eq(ActionHandler::Params)
