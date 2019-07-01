@@ -6,7 +6,7 @@ RSpec.describe ActionHandler::Sources::SQS do
 
     context :single do
       let(:event)   { { "Records" => [record] } }
-      let(:record)  { { "body" => { level: 32 } } }
+      let(:record)  { { "body" => JSON.generate({ level: 32 }) } }
 
       it "should return an ActionHandler::Params object" do
         expect(params.class).to eq(ActionHandler::Params)
@@ -19,8 +19,8 @@ RSpec.describe ActionHandler::Sources::SQS do
 
     context :multiple do
       let(:event)   { { "Records" => [one, two] } }
-      let(:one)  { { "body" => { level: 32 } } }
-      let(:two)  { { "body" => { health: 27 } } }
+      let(:one)  { { "body" => JSON.generate({ level: 32 }) } }
+      let(:two)  { { "body" => JSON.generate({ health: 27 }) } }
 
       it "should return an ActionHandler::Params object" do
         expect(params.class).to eq(ActionHandler::Params)

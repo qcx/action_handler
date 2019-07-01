@@ -4,8 +4,14 @@ module ActionHandler
       def parametrize(event)
         records = event['Records'] || []
         records.reduce(ActionHandler::Params.new) do |params, record|
-          params.merge(record['body'] || {})
+          params.merge(parse(record['body']) || {})
         end
+      end
+
+      private
+
+      def parse(body)
+        JSON.parse(body)
       end
     end
   end
