@@ -9,6 +9,7 @@ module ActionHandler
       @content_type = args.slice(*CONTENT_TYPES.keys).keys.first&.to_sym
       @content = args[@content_type]
       @status = args[:status] || (@content ? 200 : 204)
+      @headers = args[:headers] || {}
     end
 
     def render
@@ -21,8 +22,12 @@ module ActionHandler
       @content_type == :json ? @content.to_json : @content
     end
 
+    def content_type_header
+      { 'Content-Type' => (CONTENT_TYPES[@content_type] if @content_type) }
+    end
+
     def headers
-      { 'Content-Type' => CONTENT_TYPES[@content_type] } if @content_type
+      content_type_header.merge(@headers).compact
     end
   end
 end

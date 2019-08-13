@@ -19,14 +19,21 @@ RSpec.describe ActionHandler::Renderer do
     context :no_content do
       let(:renderer) { ActionHandler::Renderer.new() }
       it "should render" do
-        expect(renderer.render).to eq(statusCode: 204)
+        expect(renderer.render).to eq(statusCode: 204, headers: {})
       end
     end
 
     context :different_status do
       let(:renderer) { ActionHandler::Renderer.new(status: 202) }
       it "should render" do
-        expect(renderer.render).to eq(statusCode: 202)
+        expect(renderer.render).to eq(statusCode: 202, headers: {})
+      end
+    end
+
+    context :with_headers do
+      let(:renderer) { ActionHandler::Renderer.new(status: 202, headers: { 'Access-Control-Allow-Origin': '*' }) }
+      it "should render" do
+        expect(renderer.render).to eq(statusCode: 202, headers: { 'Access-Control-Allow-Origin': '*' })
       end
     end
   end

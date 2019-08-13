@@ -30,7 +30,7 @@ RSpec.describe ActionHandler::Base do
       context :without_render do
         let(:response) { klass.index(event: event, context: {}) }
         it "should render response" do
-          expect(response).to eq(statusCode: 204)
+          expect(response).to eq(statusCode: 204, headers: {})
         end
       end
     end
