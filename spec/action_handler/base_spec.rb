@@ -1,6 +1,7 @@
 RSpec.describe ActionHandler::Base do
   describe :call do
-    def klass
+
+    let(:klass) do
       Class.new(ActionHandler::Base) do
         source ActionHandler::Sources::HTTP.new
 
@@ -13,23 +14,25 @@ RSpec.describe ActionHandler::Base do
         end
       end
     end
+
     context :action do
-      let(:event) { { "queryStringParameters" => { key: "secret_key" } } }
+      let(:qs)      { { 'key' => 'secret_key' } }
+      let(:event)   { { 'queryStringParameters' => qs, 'httpMethod' => 'GET' } }
 
       context :with_render do
         let(:response) { klass.show(event: event, context: {}) }
-        it "should render response" do
+        it 'should render response' do
           expect(response).to eq(
             statusCode: 200,
             body: "{\"key\":\"secret_key\"}",
-            headers: { "Content-Type" => "application/json" }
+            headers: { 'Content-Type' => 'application/json' }
           )
         end
       end
 
       context :without_render do
         let(:response) { klass.index(event: event, context: {}) }
-        it "should render response" do
+        it 'should render response' do
           expect(response).to eq(statusCode: 204, headers: {})
         end
       end
