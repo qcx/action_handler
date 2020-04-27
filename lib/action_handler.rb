@@ -1,4 +1,5 @@
 require 'json'
+require 'base64'
 require 'rack'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'active_support/core_ext/hash/except'
