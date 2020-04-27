@@ -56,6 +56,18 @@ RSpec.describe ActionHandler::Sources::HTTP do
           expect(params[:level]).to eq(32)
         end
       end
+
+      context :base64 do
+        let(:body)  { Base64.encode64(JSON.generate({ level: 32 })) }
+        let(:event) { { 'headers' => headers, 'body' => body, 'isBase64Encoded' => true } }
+
+        it 'should return an ActionHandler::Params object' do
+          expect(params.class).to eq(ActionHandler::Params)
+        end
+
+        it 'should have the correct params' do
+          expect(params[:level]).to eq(32)
+        end
       end
     end
 
