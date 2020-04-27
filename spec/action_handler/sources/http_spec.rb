@@ -31,15 +31,31 @@ RSpec.describe ActionHandler::Sources::HTTP do
 
     context :body do
       let(:headers) { { 'Content-Type' => 'application/json' } }
-      let(:body)    { JSON.generate({ level: 32 }) }
       let(:event)   { { 'headers' => headers, 'body' => body } }
 
-      it 'should return an ActionHandler::Params object' do
-        expect(params.class).to eq(ActionHandler::Params)
+      context :json do
+        let(:body) { JSON.generate({ level: 32 }) }
+
+        it 'should return an ActionHandler::Params object' do
+          expect(params.class).to eq(ActionHandler::Params)
+        end
+
+        it 'should have the correct params' do
+          expect(params[:level]).to eq(32)
+        end
       end
 
-      it 'should have the correct params' do
-        expect(params[:level]).to eq(32)
+      context :hash do
+        let(:body) { { level: 32 } }
+
+        it 'should return an ActionHandler::Params object' do
+          expect(params.class).to eq(ActionHandler::Params)
+        end
+
+        it 'should have the correct params' do
+          expect(params[:level]).to eq(32)
+        end
+      end
       end
     end
 

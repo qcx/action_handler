@@ -66,7 +66,10 @@ module ActionHandler
         end
 
         def body
-          @body ||= if @event['isBase64Encoded']
+          @body ||= if @event['body'].is_a?(Hash)
+            # Quick fix for async lambda parsing json automatically
+            JSON.generate(@event['body'])
+          elsif @event['isBase64Encoded']
             Base64.decode64(@event['body'])
           else
             @event['body'] || ''
