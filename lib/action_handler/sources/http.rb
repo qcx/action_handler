@@ -2,7 +2,8 @@ module ActionHandler
   module Sources
     class HTTP
       SOURCES = {
-        '1.0' => ActionHandler::Sources::HTTP::V1
+        '1.0' => ActionHandler::Sources::HTTP::V1,
+        '2.0' => ActionHandler::Sources::HTTP::V2
       }
 
       def parametrize(event)
