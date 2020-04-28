@@ -3,7 +3,7 @@ RSpec.describe ActionHandler::Base do
 
     let(:klass) do
       Class.new(ActionHandler::Base) do
-        source ActionHandler::Sources::HTTP.new
+        source ActionHandler::Sources::Invoke.new
 
         def index
           { key: params[:key] }
@@ -16,8 +16,7 @@ RSpec.describe ActionHandler::Base do
     end
 
     context :action do
-      let(:qs)      { { 'key' => 'secret_key' } }
-      let(:event)   { { 'queryStringParameters' => qs, 'httpMethod' => 'GET' } }
+      let(:event) { { 'key' => 'secret_key' } }
 
       context :with_render do
         let(:response) { klass.show(event: event, context: {}) }
