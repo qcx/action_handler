@@ -69,6 +69,32 @@ RSpec.describe ActionHandler::Sources::HTTP do
           expect(params[:level]).to eq(32)
         end
       end
+
+      context 'nil body' do
+        let(:body)  { nil }
+        let(:event) { { 'headers' => headers, 'body' => body } }
+
+        it 'should return an ActionHandler::Params object' do
+          expect(params.class).to eq(ActionHandler::Params)
+        end
+
+        it 'should have empty params' do
+          expect(params.to_h).to be_empty
+        end
+      end
+
+      context 'empty body' do
+        let(:body)  { '' }
+        let(:event) { { 'headers' => headers, 'body' => body } }
+
+        it 'should return an ActionHandler::Params object' do
+          expect(params.class).to eq(ActionHandler::Params)
+        end
+
+        it 'should have empty params' do
+          expect(params.to_h).to be_empty
+        end
+      end
     end
 
     context :none do

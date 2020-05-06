@@ -98,7 +98,7 @@ module ActionHandler
           {
             'rack.request.form_hash' => JSON.parse(body),
             'rack.request.form_input' => input
-          } if headers['Content-Type'] == 'application/json'
+          } if headers['Content-Type'] == 'application/json' && body.to_s.length.positive?
         end
       end
     end
