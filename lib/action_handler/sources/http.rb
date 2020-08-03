@@ -21,7 +21,7 @@ module ActionHandler
       end
 
       def path_parameters
-        @event['pathParameters'] || {}
+        @event['pathParameters'] || @event['path'] || {}
       end
 
       class Env
@@ -39,12 +39,16 @@ module ActionHandler
 
         def environment
           {
-            'REQUEST_METHOD' => @event['httpMethod'],
+            'REQUEST_METHOD' => request_method,
             'QUERY_STRING' => query_string,
             'CONTENT_LENGTH' => body.bytesize.to_s,
             'CONTENT_TYPE' => headers['Content-Type'] || '',
             'rack.input' => input,
           }
+        end
+
+        def request_method
+          @event['httpMethod'] || @event['method']
         end
 
         def headers
@@ -77,7 +81,7 @@ module ActionHandler
         end
 
         def query_string_parameters
-          @event['multiValueQueryStringParameters'] || @event['queryStringParameters']
+          @event['multiValueQueryStringParameters'] || @event['queryStringParameters'] || @event['query']
         end
 
         def http_headers
