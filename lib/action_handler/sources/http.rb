@@ -33,14 +33,6 @@ module ActionHandler
           environment
             .merge(http_headers)
             .merge(request_form || {})
-          {
-            'REQUEST_METHOD' => @event['httpMethod'],
-            'QUERY_STRING' => query_string,
-            'CONTENT_LENGTH' => body.bytesize.to_s,
-            'CONTENT_TYPE' => headers['Content-Type'] || '',
-            'rack.input' => input,
-          }.merge(http_headers)
-          .merge(request_form || {})
         end
 
         private
