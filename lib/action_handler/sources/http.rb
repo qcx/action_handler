@@ -21,7 +21,7 @@ module ActionHandler
       end
 
       def path_parameters
-        @event['pathParameters'] || @event['path'] || {}
+        @event['pathParameters'] || {}
       end
 
       class Env
