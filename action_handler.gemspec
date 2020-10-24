@@ -36,6 +36,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry", "~> 0.12"
 
-  spec.add_runtime_dependency "activesupport", "~> 5.2"
+  spec.add_runtime_dependency "activesupport", ">= 5.2"
   spec.add_runtime_dependency "rack", "~> 2.0"
 end
