@@ -132,6 +132,18 @@ RSpec.describe ActionHandler::Sources::HTTP do
           expect(params.dig(:nested, :date)).to eq("2021-06-01 10:29:07 -0300")
         end
       end
+
+      context :multiValueQueryStringParameters do
+        let(:event) { { 'multiValueQueryStringParameters' => { "nested%5Bdate%5D" => ["2021-06-01+10%3A29%3A07+-0300"] } } }
+
+        it 'should return an ActionHandler::Params object' do
+          expect(params.class).to eq(ActionHandler::Params)
+        end
+
+        it 'should have the correct params' do
+          expect(params.dig(:nested, :date)).to eq("2021-06-01 10:29:07 -0300")
+        end
+      end
     end
 
     context :none do

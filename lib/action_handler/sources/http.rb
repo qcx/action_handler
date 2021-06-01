@@ -90,6 +90,8 @@ module ActionHandler
           case value
           when String
             Rack::Utils.unescape(value)
+          when Array
+            value.map { |v| parse_query_string_value(v) }
           else
             value
           end
