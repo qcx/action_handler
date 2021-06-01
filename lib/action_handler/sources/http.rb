@@ -81,7 +81,18 @@ module ActionHandler
         end
 
         def parsed_query_string_parameters
-          query_string_parameters.transform_keys { |key| Rack::Utils.unescape(key) }
+          query_string_parameters.map do |key, value|
+            [Rack::Utils.unescape(key), parse_query_string_value(value)]
+          end.to_h
+        end
+
+        def parse_query_string_value(value)
+          case value
+          when String
+            Rack::Utils.unescape(value)
+          else
+            value
+          end
         end
 
         def query_string_parameters
