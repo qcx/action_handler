@@ -118,6 +118,22 @@ RSpec.describe ActionHandler::Sources::HTTP do
       end
     end
 
+    context :alb do
+      let(:base) { { 'httpMethod' => 'GET' } }
+
+      context :queryStringParameters do
+        let(:event) { { 'queryStringParameters' => { "nested%5Blevel%5D" => "32" } } }
+
+        it 'should return an ActionHandler::Params object' do
+          expect(params.class).to eq(ActionHandler::Params)
+        end
+
+        it 'should have the correct params' do
+          expect(params.dig(:nested, :level)).to eq(32)
+        end
+      end
+    end
+
     context :none do
       let(:base)  { {} }
       let(:event) { { 'headers' => { 'level' => 32 } } }

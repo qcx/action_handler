@@ -77,11 +77,15 @@ module ActionHandler
         end
 
         def query_string
-          @query_string ||= Rack::Utils.build_query(query_string_parameters || {})
+          @query_string ||= Rack::Utils.build_query(parsed_query_string_parameters)
+        end
+
+        def parsed_query_string_parameters
+          query_string_parameters.transform_keys { |key| Rack::Utils.unescape(key) }
         end
 
         def query_string_parameters
-          @event['multiValueQueryStringParameters'] || @event['queryStringParameters'] || @event['query']
+          @event['multiValueQueryStringParameters'] || @event['queryStringParameters'] || @event['query'] || {}
         end
 
         def http_headers
