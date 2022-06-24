@@ -11,7 +11,7 @@ module ActionHandler
       private
 
       def parse(body)
-        JSON.parse(body)
+        JSON.parse(body.to_json)
       end
     end
   end
